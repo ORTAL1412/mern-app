@@ -12,19 +12,27 @@ const newsUserRoute = require('./routes/userRouting')
 connectDB.on('error' ,() => {
     console.log(("error"));
 })
+
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static(path.join(__dirname,'../client/build')))
+    app.get('*',(req,res)=>{
+        res.sendFile(path.join(__dirname,'../client/build','index.html'))
+})
+}
+
 const PORT =  8000;
 
-app.get('/' , (req , res)=>{
-    try {
-        console.log("home page");
+// app.get('/' , (req , res)=>{
+//     try {
+//         console.log("home page");
         
-    } 
-    catch (error) {
-        console.log("error pleas try liter");
-        res.send("error pleas try liter")
-    }
+//     } 
+//     catch (error) {
+//         console.log("error pleas try liter");
+//         res.send("error pleas try liter")
+//     }
     
-});
+// });
 
 app.use('/user' ,newsUserRoute);
 
@@ -34,9 +42,3 @@ app.listen(PORT ,(error) => {
       console.log("we're on air");
 });
 
-// if(process.env.NODE_ENV === 'production'){
-//     app.use(express.static(path.join(__dirname,'../client/build')))
-//     app.get('*',(req,res)=>{
-//         res.sendFile(path.join(__dirname,'../client/build','index.html'))
-// })
-// }
