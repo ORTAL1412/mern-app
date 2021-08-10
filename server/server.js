@@ -22,6 +22,7 @@ if(process.env.NODE_ENV === 'production'){
 
 const PORT =  8000;
 
+
 // app.get('/' , (req , res)=>{
 //     try {
 //         console.log("home page");
